@@ -10,7 +10,10 @@
     <main class="app-shell">
       <section class="panel form-panel" aria-labelledby="form-title">
         <div class="brand-row">
-          <img src="./assets/logo-axis1.png" alt="AXIS 1" class="brand-logo" />
+          <div class="brand-logo logo-box">
+            <img src="./assets/logo-axis1.png" alt="AXIS 1" />
+            <span>AXIS 1</span>
+          </div>
           <div>
             <p class="eyebrow">Ferramenta AXIS 1</p>
             <h1 id="form-title">Relatório de Tráfego Pago</h1>
@@ -74,6 +77,36 @@
           </fieldset>
 
           <fieldset>
+            <legend>Instagram orgânico</legend>
+            <div class="grid two">
+              <label>
+                Período orgânico
+                <input name="instagramPeriod" type="text" value="20/05/2026 a 18/06/2026" />
+              </label>
+              <label>
+                Visualizações
+                <input name="instagramViews" inputmode="decimal" value="96,6 mil" />
+              </label>
+              <label>
+                Interações
+                <input name="instagramInteractions" inputmode="decimal" value="1,8 mil" />
+              </label>
+              <label>
+                Novos seguidores
+                <input name="instagramFollowers" inputmode="numeric" value="277" />
+              </label>
+              <label>
+                Conteúdo compartilhado
+                <input name="instagramContent" inputmode="numeric" value="29" />
+              </label>
+            </div>
+            <label class="full">
+              Observações orgânicas
+              <textarea name="instagramNotes" rows="3" placeholder="Principais pontos do resultado orgânico do Instagram"></textarea>
+            </label>
+          </fieldset>
+
+          <fieldset>
             <legend>Análise estratégica</legend>
             <label class="full">
               Análise da AXIS 1
@@ -96,7 +129,10 @@
               <h2 id="preview-client">Cliente</h2>
               <p id="preview-period">Período do relatório</p>
             </div>
-            <img src="./assets/logo-axis1.png" alt="AXIS 1" class="report-logo" />
+            <div class="report-logo logo-box">
+              <img src="./assets/logo-axis1.png" alt="AXIS 1" />
+              <span>AXIS 1</span>
+            </div>
           </header>
 
           <section class="report-meta">
@@ -131,6 +167,9 @@
 
           <p class="auto-summary" id="auto-summary">
             No período analisado, as campanhas geraram 0 cliques, 0 conversões e investimento total de R$ 0,00.
+          </p>
+          <p class="auto-summary organic-summary" id="organic-summary">
+            No Instagram orgânico, o perfil registrou 96,6 mil visualizações, 1,8 mil interações e 277 novos seguidores.
           </p>
 
           <section class="platform-grid">
@@ -170,6 +209,24 @@
               <div class="notes">
                 <h4>Observações</h4>
                 <p id="out-googleNotes">Sem observações informadas.</p>
+              </div>
+            </div>
+
+            <div class="platform-card full-span">
+              <div class="section-heading">
+                <span></span>
+                <h3>Instagram orgânico</h3>
+              </div>
+              <p class="period-line">Período: <strong id="out-instagramPeriod">20/05/2026 a 18/06/2026</strong></p>
+              <dl class="metrics-grid instagram">
+                <div><dt>Visualizações</dt><dd id="out-instagramViews">96,6 mil</dd></div>
+                <div><dt>Interações</dt><dd id="out-instagramInteractions">1,8 mil</dd></div>
+                <div><dt>Novos seguidores</dt><dd id="out-instagramFollowers">277</dd></div>
+                <div><dt>Conteúdo compartilhado</dt><dd id="out-instagramContent">29</dd></div>
+              </dl>
+              <div class="notes">
+                <h4>Observações</h4>
+                <p id="out-instagramNotes">Sem observações informadas.</p>
               </div>
             </div>
           </section>

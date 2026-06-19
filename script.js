@@ -4,6 +4,13 @@ const form = document.querySelector("#report-form");
 const clearButton = document.querySelector("#clear-form");
 const pdfButton = document.querySelector("#generate-pdf");
 
+const compactMetricFields = new Set([
+  "instagramViews",
+  "instagramInteractions",
+  "instagramFollowers",
+  "instagramContent",
+]);
+
 const currencyFields = new Set([
   "metaSpend",
   "metaLinkCpc",
@@ -62,6 +69,10 @@ function formatDate(value) {
   return new Intl.DateTimeFormat("pt-BR").format(date);
 }
 
+function compactValue(value, fallback = "0") {
+  return value && value.trim() ? value.trim() : fallback;
+}
+
 function getData() {
   return fields.reduce((data, field) => {
     data[field.name] = field.value.trim();
@@ -107,12 +118,26 @@ function updatePreview() {
     )} conversões e investimento total de ${formatCurrency(investment)}.`,
   );
 
+  setText(
+    "organic-summary",
+    `No Instagram orgânico, o perfil registrou ${compactValue(
+      data.instagramViews,
+    )} visualizações, ${compactValue(data.instagramInteractions)} interações e ${compactValue(
+      data.instagramFollowers,
+    )} novos seguidores.`,
+  );
+
   fields.forEach((field) => {
     const output = document.querySelector(`#out-${field.name}`);
     if (!output) return;
 
     if (field.tagName === "TEXTAREA") {
       output.textContent = field.value.trim() || "Sem observações informadas.";
+      return;
+    }
+
+    if (compactMetricFields.has(field.name)) {
+      output.textContent = compactValue(field.value);
       return;
     }
 
@@ -132,6 +157,19 @@ function updatePreview() {
 
   const analysis = data.axisAnalysis || "Inclua a análise estratégica para consolidar a leitura do desempenho.";
   setText("out-axisAnalysis", analysis);
+}
+
+function setupLogoFallbacks() {
+  document.querySelectorAll(".logo-box img").forEach((image) => {
+    const wrapper = image.closest(".logo-box");
+    const fallback = () => wrapper?.classList.add("is-fallback");
+
+    if (image.complete && image.naturalWidth === 0) {
+      fallback();
+    }
+
+    image.addEventListener("error", fallback);
+  });
 }
 
 function saveData() {
@@ -174,6 +212,7 @@ function generatePdf() {
   window.print();
 }
 
+setupLogoFallbacks();
 loadData();
 updatePreview();
 
